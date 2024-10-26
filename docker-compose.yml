@@ -226,8 +226,8 @@ services:
 
     data-collection-python:
         build:
-            context: .
-            dockerfile: Dockerfile.python
+            context: ./data-collection-python
+            dockerfile: Dockerfile
         env_file:
             - .env
         networks:
@@ -242,8 +242,8 @@ services:
 
     data-collection-node:
         build:
-            context: .
-            dockerfile: Dockerfile.node
+            context: ./data-collection-node
+            dockerfile: Dockerfile
         env_file:
             - .env
         networks:
