@@ -1,45 +1,80 @@
-# Proje Yapısı
+# Proje Teknolojileri ve Servisleri
 
-Bu proje, çeşitli veri hizmetlerini ve izleme (monitoring) servislerini bir araya getirir. Aşağıda her bir servisin tanımı ve kullanım alanları bulunmaktadır.
+Bu belgede, projemizde kullandığımız teknolojiler ve bunların sunduğu hizmetler hakkında bilgiler yer almaktadır.
 
-## 1. Mesajlaşma Servisleri
+## 1. Mesaj Brokerleri
 
-### Kafka ve Kafdrop
-- **Kafka**: Dağıtık bir mesajlaşma sistemi; veri akışını yönetir.
-- **Kafdrop**: Kafka'nın kullanıcı dostu bir arayüzü; veri akışını görsel olarak izlemeye yarar.
+### Kafka
+- **Açıklama**: Yüksek hacimli veri akışlarını işlemek için kullanılan dağıtık bir mesajlaşma sistemidir. Üreticilerden tüketicilere veri iletimini sağlar.
+- **Kullanım Alanları**: Gerçek zamanlı veri akışı, olay tabanlı mimariler.
 
 ### RabbitMQ
-- **RabbitMQ**: Gelişmiş bir mesaj kuyruğu servisi; farklı uygulamalar arasında veri aktarımını sağlar. Yönetim arayüzü ile birlikte gelir.
+- **Açıklama**: Açık kaynak kodlu bir mesaj kuyruğu yazılımıdır. Mesajları güvenli bir şekilde yönlendirir ve dağıtır.
+- **Kullanım Alanları**: Mesaj iletimi, arka planda çalışan mikroservisler arasında veri paylaşımı.
 
 ## 2. Veri Tabanları
 
-### İlişkisel Veritabanları
-- **MySQL**: Yapılandırılmış veri için ideal bir ilişkisel veritabanıdır.
-- **phpMyAdmin**: MySQL için web tabanlı yönetim arayüzü.
-- **PostgreSQL**: Gelişmiş özelliklere sahip bir ilişkisel veritabanıdır.
-- **PgAdmin**: PostgreSQL için web tabanlı bir yönetim arayüzü.
+### MySQL
+- **Açıklama**: İlişkisel bir veritabanı yönetim sistemidir. Yapılandırılmış verilerin depolanması için idealdir.
+- **Kullanım Alanları**: Kullanıcı bilgileri, uygulama verileri.
 
-### NoSQL Veritabanları
-- **MongoDB**: Esnek veri yapıları için uygun bir NoSQL veritabanıdır.
-- **Mongo Express**: MongoDB'yi görsel olarak yönetmek için bir arayüz.
-- **Cassandra**: Yüksek ölçeklenebilirlik sunan dağıtık bir NoSQL veritabanıdır.
-- **CouchDB**: HTTP üzerinden erişilebilen belge tabanlı bir veritabanıdır.
+### MongoDB
+- **Açıklama**: NoSQL veritabanıdır ve belge tabanlı bir yapıya sahiptir. JSON formatında veri depolar.
+- **Kullanım Alanları**: Esnek veri yapısı gerektiren uygulamalar, büyük veri uygulamaları.
 
-### Diğer Veritabanları
-- **ClickHouse**: Hızlı analitik sorgular için tasarlanmış bir veritabanıdır.
-- **Redis**: Anahtar-değer veritabanı; veri önbellekleme için idealdir.
-- **InfluxDB**: Zaman serisi veritabanı; zamanla değişen verileri yönetir.
-- **Chronograf**: Zaman serisi verilerini görselleştirmek için kullanılan bir araç.
-- **Elasticsearch**: Arama ve analiz motorudur.
-- **Kibana**: Elasticsearch ile toplanan verileri görselleştirir.
-- **Neo4j**: Graf veritabanı; ilişkisel verileri grafiksel olarak yönetir.
+### PostgreSQL
+- **Açıklama**: İleri düzey özelliklere sahip bir ilişkisel veritabanı sistemidir. Verilerin karmaşık sorgularla işlenmesini sağlar.
+- **Kullanım Alanları**: Analitik uygulamalar, coğrafi bilgi sistemleri.
 
-## 3. İzleme Servisleri
+### Cassandra
+- **Açıklama**: Dağıtık bir NoSQL veritabanıdır. Yüksek yazma ve okuma hızı ile bilinir.
+- **Kullanım Alanları**: Büyük veri uygulamaları, yüksek ölçeklenebilirlik gerektiren projeler.
 
-- **Prometheus**: Zaman serisi veri toplama ve izleme aracı.
-- **Grafana**: Zaman serisi verilerini görselleştirmek için kullanılır.
+### ClickHouse
+- **Açıklama**: Analitik veritabanı yönetim sistemidir. Gerçek zamanlı veri analizi için optimize edilmiştir.
+- **Kullanım Alanları**: Veri analitiği, büyük veri raporlama.
 
-## 4. Veri Toplama Servisleri
+### Redis
+- **Açıklama**: Anahtar-değer veritabanı olarak çalışan bir bellek içi veri deposudur. Hızlı veri erişimi sağlar.
+- **Kullanım Alanları**: Önbellekleme, hızlı veri erişimi gerektiren uygulamalar.
 
-- **Data Collection (Python)**: Farklı veri kaynaklarından veri toplamak için yazılmış bir Python uygulaması.
-- **Data Collection (Node.js)**: Farklı veri kaynaklarından veri toplamak için yazılmış bir Node.js uygulaması.
+### InfluxDB
+- **Açıklama**: Zaman serisi verilerini depolamak ve sorgulamak için tasarlanmış bir veritabanıdır.
+- **Kullanım Alanları**: Gerçek zamanlı veri izleme, IoT uygulamaları.
+
+### Neo4j
+- **Açıklama**: Graf tabanlı bir veritabanı yönetim sistemidir. Veriler arasındaki ilişkileri görselleştirir.
+- **Kullanım Alanları**: Sosyal ağlar, ilişkisel veri analizleri.
+
+### CouchDB
+- **Açıklama**: NoSQL veritabanıdır ve verileri JSON belgeleri olarak depolar. Dağıtık bir yapıdadır.
+- **Kullanım Alanları**: Verilerin esnek yapıda saklanması gereken uygulamalar.
+
+## 3. İzleme ve Yönetim Araçları
+
+### Prometheus
+- **Açıklama**: Zaman serisi verilerini toplamak ve izlemek için kullanılan bir sistemdir. Kendi sorgulama dili (PromQL) ile veri analizine olanak tanır.
+- **Kullanım Alanları**: Uygulama ve sistem izleme, uyarı sistemleri.
+
+### Grafana
+- **Açıklama**: Veri görselleştirme aracı olarak kullanılan bir platformdur. Farklı veri kaynaklarından gelen verileri grafiklerle sunar.
+- **Kullanım Alanları**: İzleme panoları, analitik raporlar.
+
+## 4. Web Servisleri
+
+### Nginx
+- **Açıklama**: Yük dengelemesi ve ters proxy işlevselliği sunan bir web sunucusudur. Performans ve ölçeklenebilirlik için idealdir.
+- **Kullanım Alanları**: Statik içerik sunumu, API yönlendirmesi.
+
+## 5. Elasticsearch ve Kibana
+
+### Elasticsearch
+- **Açıklama**: Tam metin arama ve analitik veritabanı olarak çalışan bir sistemdir. Veri sorgulama ve analiz için güçlü bir arayüz sunar.
+- **Kullanım Alanları**: Veri arama, analitik raporlama.
+
+### Kibana
+- **Açıklama**: Elasticsearch ile entegre çalışan bir veri görselleştirme ve analiz aracıdır.
+- **Kullanım Alanları**: Elasticsearch verilerinin görselleştirilmesi, panoların oluşturulması.
+
+## Sonuç
+Bu teknolojiler, projenin verimliliğini artırmak, veri akışını yönetmek ve izlemek için kritik öneme sahiptir. Her bir bileşen, projenin ihtiyaçlarına yönelik olarak seçilmiş ve optimize edilmiştir.
