@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
     # Kafka ve Kafdrop
@@ -36,6 +34,18 @@ services:
             - my_shared_network
         depends_on:
             - kafka
+
+    # RabbitMQ
+    rabbitmq:
+        image: rabbitmq:management
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        networks:
+            - my_shared_network
+        environment:
+            RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+            RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
 
     # Veri Tabanları
     mysql:
@@ -244,8 +254,6 @@ services:
             - "3000:3000"
         networks:
             - my_shared_network
-        depends_on:
-            - prometheus
 
     # Data Collection Servisleri
     data-collection-python:
@@ -261,6 +269,7 @@ services:
             - mongo
             - postgresql
             - kafka
+            - rabbitmq
         command: >
             sh -c "while true; do python src/app.py; sleep ${SLEEP_DURATION}; done"
 
@@ -277,6 +286,7 @@ services:
             - mongo
             - kafka
             - postgresql
+            - rabbitmq
         command: >
             sh -c "while true; do node src/app.js; echo 'Sleeping for ${SLEEP_DURATION} seconds...'; sleep ${SLEEP_DURATION}; echo 'Woke up!'; done"
 
