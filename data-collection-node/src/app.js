@@ -1,24 +1,43 @@
-const express = require('express');
-const mysql = require('mysql2');
-const app = express();
-const PORT = process.env.PORT || 3000;
+const mysql = require('mysql');
+const { MongoClient } = require('mongodb');
+const axios = require('axios');
 
-const connection = mysql.createConnection({
-  host: process.env.MYSQL_HOST || 'mysql',
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE
+const mysqlConnection = mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE
 });
 
-app.get('/data', (req, res) => {
-  connection.query('SELECT * FROM sample_data', (error, results) => {
-    if (error) {
-      return res.status(500).send(error);
-    }
-    res.json(results);
-  });
-});
+const mongoClient = new MongoClient(process.env.MONGO_URI);
 
-app.listen(PORT, () => {
-  console.log(`API server running on port ${PORT}`);
-});
+const collectData = async () => {
+    // MySQL'den veri çekme
+    mysqlConnection.connect();
+
+    mysqlConnection.query('SELECT * FROM your_table;', async (error, results) => {
+        if (error) throw error;
+
+        // MongoDB'ye veri ekleme
+        const db = mongoClient.db(process.env.MONGO_DATABASE);
+        const collection = db.collection('your_collection');
+        await collection.insertMany(results.map(item => ({ data: item })));
+
+        // API'den veri çekme
+        try {
+            const response = await axios.get('https://api.example.com/data');
+            await collection.insertOne({ api_data: response.data });
+        } catch (err) {
+            console.error('API veri çekme hatası:', err);
+        }
+    });
+
+    mysqlConnection.end();
+};
+
+const startCollecting = async () => {
+    await mongoClient.connect();
+    setInterval(collectData, parseInt(process.env.SLEEP_DURATION) * 1000);
+};
+
+startCollecting();
