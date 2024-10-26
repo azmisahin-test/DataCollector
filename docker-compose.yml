@@ -215,7 +215,7 @@ services:
       - postgresql
 
   dbeaver:
-    image: dbeaver/dbeaver
+    image: dbeaver/cloudbeaver
     ports:
       - "8084:8080" # DBeaver web interface
     networks:
